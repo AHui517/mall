@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.*;
 @ControllerAdvice
 public class RuntimeExceptionHandler {
 
-    @ExceptionHandler(RuntimeException.class)
-    @ResponseBody
-    @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResponseVo handle(RuntimeException e) {
-        return ResponseVo.error(ResponseEnum.ERROR, "意外错误");
-    }
-
-    @ExceptionHandler(UserLoginException.class)
-    @ResponseBody
-    public ResponseVo userLoginHandle() {
-        return ResponseVo.error(ResponseEnum.NEED_LOGIN);
-    }
+//    @ExceptionHandler(RuntimeException.class)
+//    @ResponseBody
+//    @ResponseStatus(HttpStatus.FORBIDDEN)
+//    public ResponseVo handle(RuntimeException e) {
+//        return ResponseVo.error(ResponseEnum.ERROR, "意外错误");
+//    }
+//
+//    @ExceptionHandler(UserLoginException.class)
+//    @ResponseBody
+//    public ResponseVo userLoginHandle() {
+//        return ResponseVo.error(ResponseEnum.NEED_LOGIN);
+//    }
 }

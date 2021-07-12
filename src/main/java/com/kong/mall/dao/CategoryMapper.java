@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * @program: mall
  * @description: category接口
@@ -14,10 +16,6 @@ import org.apache.ibatis.annotations.Select;
  **/
 @Mapper
 public interface CategoryMapper {
-//    注解方式
-    @Select("select * from mall_category where id = #{id}")
-    Category findById(@Param("id") Integer id);
 
-//    xml配置方式
-    Category queryById(Integer id);
+    List<Category> selectAll();
 }

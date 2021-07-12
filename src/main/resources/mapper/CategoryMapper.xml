@@ -6,4 +6,8 @@
     <select id="queryById" resultType="com.kong.mall.pojo.Category">
         select * from mall_category where id = #{id}
     </select>
+
+    <select id="selectAll" resultType="com.kong.mall.pojo.Category">
+        select id, parent_id, name, sort_order from mall_category where status = 1;
+    </select>
 </mapper>

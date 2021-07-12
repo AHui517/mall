@@ -8,12 +8,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class MallApplicationTests {
-    @Autowired
-    private CategoryMapper categoryMapper;
 
     @Test
     void contextLoads() {
-        System.out.println(categoryMapper.findById(100015));
+
     }
 
 }
