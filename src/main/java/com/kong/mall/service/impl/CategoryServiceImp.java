@@ -27,10 +27,12 @@ public class CategoryServiceImp implements ICategoryService {
     @Autowired
     private CategoryMapper categoryMapper;
 
+
     @Override
     public ResponseVo<List<CategoryVo>> selectAll() {
         //查询数据库中所有的category(类目)
         List<Category> categoryList = categoryMapper.selectAll();
+
         //这一步是将类目中parent_id这个字段为0的类目查询出来
         //并且将他转变为一个categoryVo对象 并加入到列表中。
         List<CategoryVo> categoryVoList = new ArrayList<>();
@@ -66,6 +68,11 @@ public class CategoryServiceImp implements ICategoryService {
         return ResponseVo.success(categoryVoList);
     }
 
+    /**
+     * 将category映射为categoryVo
+     * @param category
+     * @return
+     */
     private CategoryVo category2CategoryVo(Category category) {
         CategoryVo categoryVo = new CategoryVo();
         BeanUtils.copyProperties(category, categoryVo);
@@ -98,4 +105,32 @@ public class CategoryServiceImp implements ICategoryService {
             findSubCategory(categoryList, subCategoryList);
         }
     }
+
+
+    /**
+     * 该方法用于查询指定类目下的所有子类目(不包含本身)
+     * @param id
+     * @param subCategoryIdList
+     * @return
+     */
+    @Override
+    public List<Integer> findSubcategoryId(Integer id, List<Integer> subCategoryIdList) {
+        List<Category> categoryList = categoryMapper.selectAll();
+
+        return findSubcategoryId(id, subCategoryIdList, categoryList);
+    }
+
+    //递归寻找子目录的id,避免多次向数据库查找
+    private List<Integer> findSubcategoryId(Integer id, List<Integer> subCategoryIdList, List<Category> categoryList) {
+        for (Category category : categoryList) {
+            if (category.getParentId().equals(id)) {
+                //存在父子类目关系，继续往下查询。
+                Integer subCategoryId = category.getId();
+                subCategoryIdList.add(subCategoryId);
+                findSubcategoryId(subCategoryId, subCategoryIdList);
+            }
+        }
+        return subCategoryIdList;
+    }
+
 }

@@ -14,4 +14,6 @@ import java.util.List;
  **/
 public interface ICategoryService {
     ResponseVo<List<CategoryVo>> selectAll();
+
+    List<Integer> findSubcategoryId(Integer id, List<Integer> subCategoryIdList);
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kong.mall.dao.ProductMapper">
+    <select id="selectByCategoryIdList" parameterType="list" resultType="com.kong.mall.pojo.Product">
+        select
+            id, category_id, name, subtitle,main_image, status, price
+        from
+            mall_product
+        where status = 1
+        <if test="categoryIdList != null and categoryIdList.size() != 0">
+            and category_id in
+            <foreach collection="categoryIdList" item="item" index="index" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="detail" parameterType="java.lang.Integer" resultType="com.kong.mall.pojo.Product">
+        select
+            *
+        from
+            mall_product
+        where
+            id = #{productId}
+    </select>
+</mapper>
