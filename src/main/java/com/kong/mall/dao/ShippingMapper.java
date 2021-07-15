@@ -1,7 +1,12 @@
 package com.kong.mall.dao;
 
 import com.kong.mall.pojo.Shipping;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
+@Mapper
 public interface ShippingMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +19,9 @@ public interface ShippingMapper {
     int updateByPrimaryKeySelective(Shipping record);
 
     int updateByPrimaryKey(Shipping record);
+
+    int deleteByPrimaryKeyAndShippingId(@Param("uid") Integer uid,
+                                        @Param("shipping") Integer shippingId);
+
+    List<Shipping> selectByUserId(Integer uid);
 }

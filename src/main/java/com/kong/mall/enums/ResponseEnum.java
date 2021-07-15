@@ -22,7 +22,8 @@ public enum ResponseEnum {
     PRODUCT_OFF_SALE_OR_DELETE(12, "商品已下架或删除"),
     PRODUCT_NOT_EXIST(13, "商品不存在"),
     PRODUCT_STOCK_ERROR(14, "库存错误"),
-    CART_PRODUCT_NOT_EXIST(15, "购物车里商品不存在");
+    CART_PRODUCT_NOT_EXIST(15, "购物车里商品不存在"),
+    DELETE_ADDRESS_ERROR(16, "删除地址失败");
 
     Integer code;
 

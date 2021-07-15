@@ -41,7 +41,7 @@
       #{receiverZip,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.kong.mall.pojo.Shipping">
+  <insert id="insertSelective" parameterType="com.kong.mall.pojo.Shipping" useGeneratedKeys="true" keyProperty="id">
     insert into mall_shipping
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -74,12 +74,6 @@
       <if test="receiverZip != null">
         receiver_zip,
       </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -111,12 +105,6 @@
       </if>
       <if test="receiverZip != null">
         #{receiverZip,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -169,9 +157,24 @@
       receiver_city = #{receiverCity,jdbcType=VARCHAR},
       receiver_district = #{receiverDistrict,jdbcType=VARCHAR},
       receiver_address = #{receiverAddress,jdbcType=VARCHAR},
-      receiver_zip = #{receiverZip,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      receiver_zip = #{receiverZip,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <delete id="deleteByPrimaryKeyAndShippingId" parameterType="map">
+    delete from mall_shipping
+        where
+    user_id = #{uid}
+        and
+    id = #{shippingId}
+  </delete>
+
+  <select id="selectByUserId" parameterType="java.lang.Integer" resultType="com.kong.mall.pojo.Shipping">
+    select
+        *
+    from
+        mall_shipping
+    where
+        user_id = #{uid}
+  </select>
 </mapper>
