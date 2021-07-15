@@ -27,4 +27,17 @@ public class ProductVo {
     private Integer status;
 
     private BigDecimal price;
+
+    public ProductVo() {
+    }
+
+    public ProductVo(Integer id, Integer categoryId, String name, String subtitle, String mainImage, Integer status, BigDecimal price) {
+        this.id = id;
+        this.categoryId = categoryId;
+        this.name = name;
+        this.subtitle = subtitle;
+        this.mainImage = mainImage;
+        this.status = status;
+        this.price = price;
+    }
 }

@@ -1,6 +1,7 @@
 package test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -12,10 +13,8 @@ import java.util.List;
  **/
 public class Test1 {
     public static void main(String[] args) {
-        List list = new ArrayList();
-        for (int i = 0; i < 10; i++) {
-            list.add(null);
-        }
-        System.out.println(list.size());
+        HashMap<String, String> map = new HashMap<>();
+        String kong = map.get("kong");
+        System.out.println(kong);
     }
 }

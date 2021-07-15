@@ -11,4 +11,5 @@ public interface ProductMapper {
     List<Product> selectByCategoryIdList(@Param("categoryIdList") List<Integer> categoryIdList);
 
     Product detail(Integer productId);
+
 }

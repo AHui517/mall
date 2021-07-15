@@ -29,7 +29,8 @@ public class UserController {
     /**
      * 注册模块
      * 需要判断前端传递的参数是否合法
-     * @Valid  为表单校验的注解
+     *
+     * @Valid 为表单校验的注解
      * @param user
      */
     @Autowired
@@ -37,12 +38,7 @@ public class UserController {
 
 
     @PostMapping("/user/register")
-    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userForm,
-                               BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            log.error("注册提交参数有无, {}", bindingResult.getFieldError().getDefaultMessage());
-            return ResponseVo.error(ResponseEnum.PARAM_ERROR,"不能为空");
-        }
+    public ResponseVo<User> register(@Valid @RequestBody UserRegisterForm userForm) {
         log.info("username={}", userForm);
         User user = new User();
         BeanUtils.copyProperties(userForm, user);
@@ -51,11 +47,7 @@ public class UserController {
 
     @PostMapping("/user/login")
     public ResponseVo<User> login(@Valid @RequestBody UserLoginForm userLoginForm,
-                                  BindingResult bindingResult,
                                   HttpSession session) {
-        if (bindingResult.hasErrors()) {
-            return ResponseVo.error(ResponseEnum.PARAM_ERROR,"账号或密码不能为空");
-        }
         ResponseVo<User> login = iUserService.login(userLoginForm.getUsername(), userLoginForm.getPassword());
         session.setAttribute(MallConst.CURRENT_USER, login.getData());
         return login;
@@ -63,10 +55,11 @@ public class UserController {
 
     @GetMapping("/user")
     public ResponseVo<User> userInfo(HttpSession session) {
-        User user = (User)session.getAttribute(MallConst.CURRENT_USER);
-        return  ResponseVo.success(user);
+        User user = (User) session.getAttribute(MallConst.CURRENT_USER);
+        return ResponseVo.success(user);
     }
-    //TODO
+
+
     @PostMapping("user/logout")
     public ResponseVo logout(HttpSession session) {
         session.removeAttribute(MallConst.CURRENT_USER);
